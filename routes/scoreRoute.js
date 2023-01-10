@@ -4,7 +4,7 @@ const ScoreData = require("../models/ScoreData");
 
 const router = express.Router();
 
-router.post("/addscore", authPlayer, async (req, res) => {
+router.post("/addscore", async (req, res) => {
   try {
     const { player, score } = req.body;
     const scoreData = await ScoreData.create({ player, score });
@@ -21,20 +21,20 @@ router.post("/addscore", authPlayer, async (req, res) => {
   }
 });
 
-router.get("/allscore",async (req,res)=>{
+router.get("/allscore", async (req, res) => {
   try {
     const scores = await ScoreData.find({});
 
     res.status(200).json({
-      status:"success",
+      status: "success",
       scores,
-    })
+    });
   } catch (err) {
     res.status(200).json({
-      status:"fail",
-      message:err.message,
-    })
+      status: "fail",
+      message: err.message,
+    });
   }
-})
+});
 
 module.exports = router;
